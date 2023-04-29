@@ -87,11 +87,8 @@ if __name__ == '__main__':
     # results = count_accuracy(dataset.B != 0, B_processed != 0)
     # logging.info("Results (after post-processing): {}.".format(results))
 
-    with open('graph_20_20.pkl', 'rb') as f:
-        graph_data = pickle.load(f)
-        B_true = graph_data['B']
-        W_true = graph_data['W']
-        X = graph_data['X']
+    B_true = np.load('n100/DAG1.npy')
+    X = np.load('n100/data1.npy')
 
     # GOLEM-EV
     W_est = golem(X, lambda_1=2e-2, lambda_2=5.0,

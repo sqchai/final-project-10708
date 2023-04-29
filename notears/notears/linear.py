@@ -99,11 +99,10 @@ if __name__ == '__main__':
     # X = utils.simulate_linear_sem(W_true, n, sem_type)
     # np.savetxt('X.csv', X, delimiter=',')
 
-    with open('graph_50_50.pkl', 'rb') as f:
-        graph_data = pickle.load(f)
-        B_true = graph_data['B']
-        W_true = graph_data['W']
-        X = graph_data['X']
+    B_true = np.load('n100/DAG1.npy')
+    W_true = utils.simulate_parameter(B_true)
+    np.savetxt('W_true.csv', W_true, delimiter=',')
+    X = np.load('n100/data1.npy')
 
     W_est = notears_linear(X, lambda1=0.1, loss_type='l2')
     assert utils.is_dag(W_est)

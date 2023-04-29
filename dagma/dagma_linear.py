@@ -155,11 +155,10 @@ if __name__ == '__main__':
     # W_true = utils.simulate_parameter(B_true)
     # X = utils.simulate_linear_sem(W_true, n, sem_type)
 
-    with open('graph_20_20.pkl', 'rb') as f:
-        graph_data = pickle.load(f)
-        B_true = graph_data['B']
-        W_true = graph_data['W']
-        X = graph_data['X']
+    B_true = np.load('n100/DAG1.npy')
+    W_true = utils.simulate_parameter(B_true)
+    np.savetxt('W_true.csv', W_true, delimiter=',')
+    X = np.load('n100/data1.npy')
     
     model = DAGMA_linear(loss_type='l2')
     start = timer()

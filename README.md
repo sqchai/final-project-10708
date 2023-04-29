@@ -17,10 +17,10 @@ please install
 The constructed synthetic data on 10, 20, 50, 100 nodes Erdos-Renyi graph are at:
 
 ```bash
-$ project-708/graph_10_10.pkl
-$ project-708/graph_20_20.pkl
-$ project-708/graph_50_50.pkl
-$ project-708/graph_100_100.pkl
+$ project-708/data_p10_e10_n1000_GP
+$ project-708/data_p20_e20_n1000_GP
+$ project-708/data_p50_e50_n1000_GP
+$ project-708/data_p100_e100_n1000_GP
 ```
 
 ## To Test

@@ -72,7 +72,7 @@ def permutation_matrix(M):
 
 
 def trainer(data):
-    EPOCHS = 400
+    EPOCHS = 600
     bs = 20
 
     data = torch.from_numpy(data)
@@ -124,24 +124,28 @@ def trainer(data):
 if __name__ == '__main__':
     utils.set_random_seed(1)
 
-    n, d, s0, graph_type, sem_type = 1000, 50, 50, 'ER', 'gauss'
-    B_true = utils.simulate_dag(d, s0, graph_type)
+    # n, d, s0, graph_type, sem_type = 1000, 50, 50, 'ER', 'gauss'
+    # B_true = utils.simulate_dag(d, s0, graph_type)
+    # W_true = utils.simulate_parameter(B_true)
+
+    # np.savetxt('W_true.csv', W_true, delimiter=',')
+
+    # X = utils.simulate_linear_sem(W_true, n, sem_type)
+    # np.savetxt('X.csv', X, delimiter=',')
+
+    # with open('graph_{}_{}.pkl'.format(d, s0), 'wb') as f:
+    #     graph_out = {'B': B_true, 'W': W_true, 'X': X}
+    #     pickle.dump(graph_out, f)
+
+    B_true = np.load('n100/DAG1.npy')
     W_true = utils.simulate_parameter(B_true)
-
     np.savetxt('W_true.csv', W_true, delimiter=',')
+    X = np.load('n100/data1.npy')
 
-    X = utils.simulate_linear_sem(W_true, n, sem_type)
-    np.savetxt('X.csv', X, delimiter=',')
-
-    with open('graph_{}_{}.pkl'.format(d, s0), 'wb') as f:
-        graph_out = {'B': B_true, 'W': W_true, 'X': X}
-        pickle.dump(graph_out, f)
-
-    with open('graph_50_50.pkl', 'rb') as f:
-        graph_data = pickle.load(f)
-        B_true = graph_data['B']
-        W_true = graph_data['W']
-        X = graph_data['X']
+    W_pred = trainer(X)
+    
+    with open('perm_linear_pred.pkl', 'wb') as f:
+        pickle.dump(W_pred, f)
 
     W_pred = trainer(X)
     
